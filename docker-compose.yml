@@ -1,0 +1,79 @@
+services:
+  git-server:
+    build: ./git-server
+    container_name: mpc-git
+    hostname: git-server
+    volumes:
+      - git_data:/var/lib/git
+      - shared_keys:/shared_keys:rw  # RW to export host key, nodes write SSH pubkeys
+    ports:
+      - "2222:22"
+    healthcheck:
+      test: ["CMD", "pgrep", "sshd"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  node1:
+    build: ./node
+    hostname: node1
+    container_name: mpc-node1
+    env_file:
+      - .env.node1
+    environment:
+      - NODE_ID=node1
+      - SOFTHSM2_CONF=/app/data/softhsm.conf
+      - HSM_MODE=demo
+    volumes:
+      - node1_data:/app/data
+      - shared_keys:/shared_keys:rw  # Write access to register SSH key
+    depends_on:
+      git-server:
+        condition: service_healthy
+    tty: true
+    stdin_open: true
+
+  node2:
+    build: ./node
+    hostname: node2
+    container_name: mpc-node2
+    env_file:
+      - .env.node2
+    environment:
+      - NODE_ID=node2
+      - SOFTHSM2_CONF=/app/data/softhsm.conf
+      - HSM_MODE=demo
+    volumes:
+      - node2_data:/app/data
+      - shared_keys:/shared_keys:rw  # Write access to register SSH key
+    depends_on:
+      git-server:
+        condition: service_healthy
+    tty: true
+    stdin_open: true
+
+  node3:
+    build: ./node
+    hostname: node3
+    container_name: mpc-node3
+    env_file:
+      - .env.node3
+    environment:
+      - NODE_ID=node3
+      - SOFTHSM2_CONF=/app/data/softhsm.conf
+      - HSM_MODE=demo
+    volumes:
+      - node3_data:/app/data
+      - shared_keys:/shared_keys:rw  # Write access to register SSH key
+    depends_on:
+      git-server:
+        condition: service_healthy
+    tty: true
+    stdin_open: true
+
+volumes:
+  git_data:
+  shared_keys:  # Shared volume for SSH key bootstrap
+  node1_data:
+  node2_data:
+  node3_data:

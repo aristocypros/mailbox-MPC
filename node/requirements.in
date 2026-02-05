@@ -1,0 +1,29 @@
+# Source file for pip-tools
+#
+# This file defines the top-level dependencies with minimum version constraints.
+# Use pip-compile to generate requirements.txt with exact versions and hashes:
+#
+#   pip install pip-tools
+#   pip-compile --generate-hashes requirements.in -o requirements.txt
+#
+# For upgrades with security scanning:
+#   pip-compile --upgrade --generate-hashes requirements.in -o requirements.txt
+#   pip-audit -r requirements.txt
+
+# HSM interface
+python-pkcs11>=0.9.3
+
+# Git operations
+GitPython>=3.1.46
+
+# Cryptographic primitives
+cryptography>=46.0.4
+
+# CLI framework
+click>=8.3.1
+
+# Fast elliptic curve operations
+fastecdsa>=3.0.1
+
+# Data classes
+attrs>=25.4.0

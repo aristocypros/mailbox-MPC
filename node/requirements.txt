@@ -1,0 +1,31 @@
+# Pinned dependencies for Mailbox MPC
+# Security: All versions are pinned to prevent supply chain attacks (CWE-1357)
+#
+# To update dependencies safely:
+#   1. Review changelogs for security implications
+#   2. Test in isolated environment first
+#   3. Update version and regenerate hashes
+#
+# To generate hashes (recommended for production):
+#   pip install pip-tools
+#   pip-compile --generate-hashes requirements.in -o requirements.txt
+#
+# Last updated: 2026-02-05
+
+# HSM interface for PKCS#11 hardware security module operations
+python-pkcs11==0.9.3
+
+# Git operations for bulletin board transport
+GitPython==3.1.46
+
+# Cryptographic primitives (high-value target - monitor for CVEs)
+cryptography==46.0.4
+
+# CLI framework
+click==8.3.1
+
+# Fast elliptic curve operations for secp256k1 (Schnorr signing)
+fastecdsa==3.0.1
+
+# Data class utilities
+attrs==25.4.0

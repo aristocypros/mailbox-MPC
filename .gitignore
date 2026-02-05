@@ -1,0 +1,21 @@
+# Claude Code related files and directories
+.claude*
+.auto-claude*
+.worktrees/
+.security-key
+logs/security/
+
+# Auto Claude data directory
+.auto-claude/
+
+# Environment files containing sensitive data
+.env
+.env.node*
+.env.node1
+.env.node2
+.env.node3
+
+# Auto Claude generated files
+.auto-claude-security.json
+.auto-claude-status
+.claude_settings.json
