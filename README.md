@@ -1,5 +1,54 @@
 # Mailbox MPC - Asynchronous Threshold Custody Demo
 
+## Table of Contents
+
+- [Project Context: An AI-Assisted Ideation Experiment](#-project-context-an-ai-assisted-ideation-experiment)
+- [Why Asynchronous MPC? The "Mailbox" Paradigm](#why-asynchronous-mpc-the-mailbox-paradigm)
+  - [The Problem with Synchronous MPC](#the-problem-with-synchronous-mpc)
+  - [The Mailbox MPC Alternative](#the-mailbox-mpc-alternative)
+  - [Real-World Scenarios Where Async Shines](#real-world-scenarios-where-async-shines)
+  - [Trade-offs](#trade-offs)
+- [Research Foundations](#-research-foundations)
+  - [Core AMPC Theory](#core-ampc-theory)
+  - [Advanced AMPC Models](#advanced-ampc-models)
+  - [How This Demo Relates to Academic Research](#how-this-demo-relates-to-academic-research)
+  - [Further Reading](#further-reading)
+- [What This Demo Implements](#what-this-demo-implements)
+- [Prerequisites](#prerequisites)
+  - [Step 1: Generate Strong PINs](#step-1-generate-strong-pins)
+  - [Step 2: Create Node-Specific Environment Files](#step-2-create-node-specific-environment-files)
+  - [Step 3: Verify Configuration](#step-3-verify-configuration)
+- [Quick Start](#quick-start)
+- [Ceremony Flow Diagram](#ceremony-flow-diagram)
+- [Architecture](#architecture)
+  - [Infrastructure Components](#infrastructure-components)
+  - [Key Files per Node](#key-files-per-node)
+- [Git Server (Bulletin Board)](#git-server-bulletin-board)
+  - [How It Works](#how-it-works)
+  - [Board Repository Structure](#board-repository-structure)
+  - [Docker Integration](#docker-integration)
+- [Manual Ceremony](#manual-ceremony)
+- [Security Notes](#security-notes)
+  - [Deterministic Nonce Derivation (SLIP-10/BIP32 Style)](#deterministic-nonce-derivation-slip-10bip32-style)
+  - [Multi-Layer Nonce Protection](#multi-layer-nonce-protection)
+  - [Flexible Participant Coordination](#flexible-participant-coordination)
+- [Troubleshooting](#troubleshooting)
+  - [Reset everything](#reset-everything)
+  - [Check node status](#check-node-status)
+  - [View git bulletin board](#view-git-bulletin-board)
+  - [Disaster Recovery](#disaster-recovery)
+- [Production Security Advisory](#production-security-advisory)
+  - [What This Demo Is Missing for Production](#what-this-demo-is-missing-for-production)
+  - [Secrets Management for Production](#1-secrets-management-for-production)
+  - [PIN Rotation Procedures](#2-pin-rotation-procedures)
+  - [Hardware HSM Recommendations](#3-hardware-hsm-recommendations)
+  - [Additional Production Security Hardening](#4-additional-production-security-hardening)
+  - [Compliance Considerations](#5-compliance-considerations)
+  - [Security Audit Checklist](#security-audit-checklist)
+  - [Reporting Security Issues](#reporting-security-issues)
+
+---
+
 ## 🧪 Project Context: An AI-Assisted Ideation Experiment
 
 **This is primarily an ideation and experimentation project.** I used both **Claude** and **Gemini** to explore how far I could push the implementation of an asynchronous MPC system, observing where the models converge in their approaches, where they diverge, and how they handle the intricate cryptographic and distributed systems challenges involved.
